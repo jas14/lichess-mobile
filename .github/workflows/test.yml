@@ -9,6 +9,10 @@ on:
 # Declare default permissions as read only.
 permissions: read-all
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'main' }}
+
 jobs:
   unit-test:
     name: Unit tests on ${{ matrix.os }}
